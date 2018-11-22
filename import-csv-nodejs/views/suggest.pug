@@ -1,0 +1,77 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  
+  
+  
+  extends layout
+
+block content
+
+  br
+
+  h2 Import CSV file using NodeJS and MongoDB
+
+  br
+
+  p
+
+   a(href='javascript:void(0)' class='btn btn-primary' id='importdata') Import CSV 
+   | &nbsp;&nbsp;&nbsp;
+   a(href='javascript:void(0)' class='btn btn-primary' id='fetchdata') Fetch Data
+   | &nbsp;&nbsp;&nbsp;
+   a(href='www.google.com' class='btn btn-primary' id='suggest') Suggest
+
+  br
+
+  h2 Enter Item id: 
+  input#audittext(
+  type='textbox'
+  name='agreement'
+  )
+  br
+  br
+  a(href='javascript:void(0)' class='btn btn-primary' id='audit') Audit
+  | &nbsp;&nbsp;&nbsp;
+  a(href='javascript:void(0)' class='btn btn-primary' id='reset1') Reset
+
+  br
+  
+  h2 Filter:
+  select(name='dropdown',id='drop')
+    each val in ['None','Less than 90 days','Between 90 and 110 days','More than 110 days']
+      option=val
+  br
+  p#message.alert.alert-success(style='display:none')
+
+  br
+
+  table.table.table-bordered
+
+    thead
+
+        tr
+
+            th #
+
+            th inventory_id
+
+            th itemid
+
+            th item_category
+
+            th company
+
+            th no_items_recieved
+
+            th date_recieved
+
+            th Number of days
+
+    tbody#trdata
+
+        tr
+
+            td(colspan='3') Click on <strong>Import CSV</strong> button to import and save data to MongoDB. <br />Click on <strong>Fetch Data</strong> button to display data from database

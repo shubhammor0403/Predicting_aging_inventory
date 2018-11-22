@@ -1,0 +1,137 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  
+  
+  
+  extends layout
+
+block content
+
+  br
+
+  h2 Inventory Data
+
+  br
+
+  p
+  a(href='javascript:void(0)' class='btn btn-primary' id='fetchdata') Load All inventory data
+  | &nbsp;&nbsp;&nbsp;
+  a(href='http://127.0.0.1:5000/' class='btn btn-primary' id='suggest') Open AI Tool
+
+  br
+  br
+  
+  h4#a1 Current 3PL:
+  select(name='dropdown',id='invsel' class = "styled-select slate")
+    each val in ['Bangalore','Delhi','Chicago','Manchester']
+      option=val
+  br
+  br
+
+  h4#a3 Audit items
+  input#audittext(
+  type='textbox'
+  name='agreement'
+  placeholder='Enter Item id'
+  class = "nice-textbox"
+  )
+  br
+  br
+  a(href='javascript:void(0)' class='btn btn-primary' id='audit') Audit item
+  | &nbsp;&nbsp;&nbsp;
+  a(href='javascript:void(0)' class='btn btn-primary' id='reset1') Reset
+
+  br
+  br
+  
+  h4#a10 Date Report:
+  
+  input#fromdate(
+  type='textbox'
+  name='agreement'
+  placeholder='Enter from date'
+  class = "nice-textbox"
+  )
+  
+  | &nbsp;&nbsp;&nbsp;
+  input#todate(
+  type='textbox'
+  name='agreement'
+  placeholder='Enter to date'
+  class = "nice-textbox"
+  )
+  | &nbsp;&nbsp;&nbsp;
+  a#search(href='javascript:void(0)' class='btn btn-primary') Search
+
+
+  h5#a6 Filter:
+  
+  
+  select(name='dropdown',id='drop', class="")
+    each val in ['None','Less than 90 days','Between 90 and 110 days','More than 110 days']
+      option=val
+  
+  br
+  p#message.alert.alert-success(style='display:none')
+
+  br
+
+  table.table.table-bordered#tablenormal
+
+    thead
+
+        tr
+
+            th 3pl_id
+
+            th inventory_id
+
+            th item_category
+
+            th company
+
+            th no_items_recieved
+
+            th date_recieved
+
+            th Number of days
+
+    tbody#trdata
+
+
+        tr
+
+            td(colspan='3') Click on <strong>Load all inventory data</strong> button to see what all items are present in the inventory.<br />Click on <strong>Open AI Tool</strong> button to get suggestions for ways to sell a particular item.
+  
+  table.table.table-bordered#tableaudit
+
+      thead
+
+          tr
+
+              th 3pl ID
+
+              th inventory_id
+
+              th inventory_location
+
+              th item_category
+
+              th company
+
+              th no_items_recieved
+
+              th no_items_remaining
+
+              th date_recieved
+
+              th Number of days
+
+              th Date sent
+
+              th Inventory sent
+
+      tbody#trdataaudit

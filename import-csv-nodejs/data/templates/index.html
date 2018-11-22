@@ -1,0 +1,130 @@
+{% extends "material/base.html" %}
+{% block title %}{{ super() }}AI Prediction Tool{% endblock %}
+{% block content %}
+<div class="showcase container">
+    <div class="row">
+        <div class="col 12 m12 offset-ml center">
+            <div class="card-panel grey darken-3 white-text">
+            <h2>Inventory Aging Predictor</h2>
+            <p>Online AI tool</p>
+            <a href="{{url_for('index')}}" class="btn btn-small danger white-text">Reset</a>
+            <!-- <a href="{{url_for('preview')}}" class="btn btn-small white purple-text waves-effect waves-dark">View Dataset</a> -->
+        </div>
+        </div>
+
+        <br><br>
+
+    </div>
+</div>
+
+<section class="section section-signup">
+        <div class="container">
+          <div class="row">
+           
+            <div class="col s12 m4">
+                <h5>Search item</h5>
+              <div class="card-panel grey lighten-4 grey-text text-darken-4 z-depth-0">
+                <form action="{{ url_for('analyze')}}" method="POST">
+                  <div class="input-field">
+                   <!-- <p class="range-field"> -->
+                        <input type="text" id="item_id" name="item_id" autocomplete="false" >
+                    <label for="Item Id">Item ID</label>
+                    
+                  </div>
+                  <div class="input-field">
+                    <!-- <p class="range-field"> -->
+                      <select name="choice" id = "choice" name = "choice">
+                        <option value="Suggest Best strategy to move forward">Suggest Best strategy to move forward</option>
+                        <option value="Move to new best 3pl">Move to new best 3pl</option>
+                        <option value="Social Media inputs">Social Media inputs</option>
+                      </select>
+                     <label for="Choice">Choice of strategy</label>
+                     
+                   </div>
+                   
+                  
+                  
+                  <Button id = "predictb" type="submit" value="Predict" class="btn btn-small grey darken-3 white-text">Predict</Button>
+                  <button id="imgload" class="btn btn-small grey darken-3 white-text"><img src = "static/imgs/mainic.gif" height="30px" width="30px"></button>
+                  <input type="reset" value="Clear" class="btn btn-small grey darken-3 white-text">
+                </form>
+              </div>
+            </div>
+             <div class="col s12 m4 offers">
+               <h5>Item Details</h5>
+                     <div class="card-panel grey lighten-4 grey-text text-darken-4 z-depth-0">
+                      
+            <p>Inventory id: {{ inventory_id }}</p>
+            <p>Inventory Location: {{ inventory_location }}</p>
+            <p>Item id: {{ item_id }}</p>
+            <p>Category: {{ category }}</p>
+            <p>Company: {{ company}} </p>
+            <p>Target audience: {{ targaud}}</p>
+            <p>Number of items: {{ noofitems}}</p>
+            <p>Selling Price: {{ price}}</p>
+            <p>Year of release: {{ year}}</p>
+            <p>Demand Factor: {{ demandfac}}</p>
+            <p>Profit(%): {{ profit}}</p>
+            <p>No of days in inventory: {{ noofdays}}</p>
+            
+            
+         
+              
+            </div>
+                     </div>
+                     
+          
+    
+            
+    
+             <div class="col s12 m4 offers">
+                <h5>Prediction: {{ result_predictionwhich }}</h5>
+                  <div class="collection" role="alert">
+                      
+                      <p  class="collection-item active grey lighten-4 grey-text text-darken-4 z-depth-0">{{ result_prediction1 }} </p>
+                      <p  class="collection-item active grey lighten-4 grey-text text-darken-4 z-depth-0">{{ result_prediction2 }} </p>
+                      <p  class="collection-item active grey lighten-4 grey-text text-darken-4 z-depth-0">{{ result_prediction3 }} </p>
+                    <!-- <p  class="collection-item active purple">{{ result_prediction2 }} </p>
+                    <p  class="collection-item active purple">{{ result_prediction3 }} </p> -->
+                </div>       				
+                             
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      {% endblock%}
+
+    
+      {% block scripts %}
+      {{super()}}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <!-- Compiled and minified JavaScript -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+      <!-- <script type="text/javascript">
+           document.addEventListener('DOMContentLoaded', function() {
+          var elems = document.querySelectorAll('select');
+          var instances = M.FormSelect.init(elems, options);
+        });
+      </script> -->
+      
+      <script>
+          // Or with jQuery
+          $('#imgload').hide();
+        $('#predictb').on('click', function(){
+          $('#predictb').hide();
+          $('#imgload').show();
+        });
+        
+        $(document).ready(function(){
+          
+          $('select').formSelect();
+        });
+      </script>
+      
+      {% endblock %}
